@@ -23,8 +23,12 @@ export default function Searchfilter() {
     if (e.target.value === ""){
         setData(searchApiData)
     }else{
-        const filterResult = searchApiData.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        const filterResult = searchApiData.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase()) || item.username.toLowerCase().includes(e.target.value.toLowerCase()))
+        if(filterResult.lenght > 0 ){
         setData(filterResult)
+        } else {
+            setData([{"name" :"NO DATA"}])
+        }
     }
     setFilterVal(e.target.value)
 
@@ -32,7 +36,7 @@ export default function Searchfilter() {
   return (
     <div>
         <div>
-            <input placeholder="search" value={filterVal} onInput={(e) => handleFilter(e)} />
+            <input placeholder="search"  type="search"value={filterVal} onInput={(e) => handleFilter(e)} />
         </div>
       <table>
         <th>name</th>
